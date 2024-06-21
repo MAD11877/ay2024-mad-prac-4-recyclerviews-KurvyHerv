@@ -11,6 +11,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.DefaultItemAnimator;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -28,37 +31,25 @@ public class ListActivity extends AppCompatActivity {
             return insets;
         });
 
-        //View imageBtn = findViewById(R.id.smallimage);
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        ArrayList<User> userList = new ArrayList<>();
+        ArrayList<User> users = new ArrayList<User>();
+        Random rand = new Random();
         for (int i = 0; i < 20; i++) {
-            int random = new Random().nextInt(999999);
-            boolean randomBool = new Random().nextBoolean();
-            String profileName = "Name " + random;
-            String description = "Description " + random;
-            Boolean followed = randomBool;
-            int id = i + 2;
-            User user = new User(profileName, description, id, followed);
-            userList.add(user);
+            int randNum = rand.nextInt(9999999);
+            String name = "Name " + randNum;
+            String description = "Description " + randNum;
+
+            User user = new User(name, description, randNum, false);
+            user.setName("Name " + randNum);
+            user.setDescription("Description " + randNum);
+            user.setId(randNum);
+            users.add(user);
         }
-//        imageBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                builder.setMessage("MADness")
-//                        .setTitle("Profile")
-//                        .setPositiveButton("VIEW", new DialogInterface.OnClickListener() {
-//
-//                            @Override
-//                            public void onClick(DialogInterface dialog, int which) {
-//                                Intent intent = (new Intent(v.getContext(), MainActivity.class));
-//                                //intent.putExtra("profileName", profileName);
-//                                startActivity(intent);
-//                            }
-//                        })
-//                        .setNegativeButton("CLOSE", null);
-//                AlertDialog alert = builder.create();
-//                alert.show();
-//            }
-//        });
+
+        RecyclerView recyclerView = findViewById(R.id.recyclerView);
+        UserAdapter userAdapter = new UserAdapter(users, this);
+        LinearLayoutManager userLayoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(userLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(userAdapter);
     }
 }

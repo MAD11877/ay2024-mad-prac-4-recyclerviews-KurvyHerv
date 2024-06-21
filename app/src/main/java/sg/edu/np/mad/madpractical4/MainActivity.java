@@ -88,5 +88,7 @@ class User {
 
     public String getName() {return name;}
     public String getDescription() {return description;}
+    public int getId() { return this.id; }
+    public boolean getFollowed() { return this.followed; }
 }
 

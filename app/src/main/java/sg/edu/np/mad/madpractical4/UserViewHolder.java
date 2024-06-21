@@ -6,15 +6,19 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.w3c.dom.Text;
+import sg.edu.np.mad.madpractical4.R;
 
 public class UserViewHolder extends RecyclerView.ViewHolder {
     ImageView smallImage;
+    ImageView bigImage;
     TextView name;
     TextView description;
-    public UserViewHolder(View itemView){
+
+    public UserViewHolder(View itemView) {
         super(itemView);
+
         smallImage = itemView.findViewById(R.id.smallimage);
+        bigImage = itemView.findViewById(R.id.bigimage);
         name = itemView.findViewById(R.id.nameTxt);
         description = itemView.findViewById(R.id.descriptionTxt);
     }
